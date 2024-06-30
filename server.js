@@ -13,9 +13,9 @@ const socket = require('socket.io')
 const server = http.createServer(app)
 
 app.use(cors({
-    origin: '*', // Allows all origins
-    credentials: false // Credentials are not allowed
-}));
+    origin: ['http://localhost:3000', 'http://localhost:3001','https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app'],
+    credentials: true
+}))
 
 const io = socket(server, {
     cors: {
