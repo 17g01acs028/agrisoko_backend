@@ -19,11 +19,12 @@ app.use(cors({
 
 const io = socket(server, {
     cors: {
-        origin: '*',
-        credentials: true
+      origin: ['http://localhost:3000', 'http://localhost:3001', 'https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app', 'https://agrisoko-client.vercel.app', 'https://agrisoko-dashboard.vercel.app'],
+      methods: ["GET", "POST"],
+      allowedHeaders: ["Content-Type"],
+      credentials: true
     }
-})
-
+  });
 
 var allCustomer = []
 var allSeller = []
