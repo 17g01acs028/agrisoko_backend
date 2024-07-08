@@ -13,18 +13,27 @@ const socket = require('socket.io')
 const server = http.createServer(app)
 
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001','https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app','https://agrisoko-client.vercel.app','https://agrisoko-dashboard.vercel.app'],
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app',
+        'https://agrisoko-client.vercel.app',
+        'https://agrisoko-dashboard.vercel.app'
+    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
     credentials: true
-}))
+}));
 
 const io = socket(server, {
     cors: {
-      origin: ['http://localhost:3000', 'http://localhost:3001', 'https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app', 'https://agrisoko-client.vercel.app', 'https://agrisoko-dashboard.vercel.app'],
-      methods: ["GET", "POST"],
-      allowedHeaders: ["Content-Type"],
-      credentials: true
-    }
-  });
+        origin: '*',
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type'],
+        credentials: true
+    },
+    transports: ['websocket', 'polling']
+});
 
 var allCustomer = []
 var allSeller = []
