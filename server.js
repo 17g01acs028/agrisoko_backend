@@ -5,6 +5,7 @@ const {
 const app = express()
 const cors = require('cors')
 const http = require('http')
+const path = require('path')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
@@ -24,6 +25,18 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
     credentials: true
 }));
+
+
+//Link web sit to server
+app.use('/client',express.static(path.join(__dirname, 'client')));
+app.get('/client/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+});
+
+app.use('/dashboard',express.static(path.join(__dirname, 'dashboard')));
+app.get('/dashboard/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dashboard', 'index.html'));
+});
 
 const io = socket(server, {
     cors: {
@@ -169,4 +182,5 @@ app.use('/api', require('./routes/dashboard/productRoutes'))
 app.get('/', (req, res) => res.send('Hello World!'))
 const port = process.env.PORT
 dbConnect()
+
 server.listen(port, () => console.log(`Server is running on port ${port}!`))

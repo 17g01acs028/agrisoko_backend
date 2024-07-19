@@ -24,7 +24,7 @@ class categoryController {
                 })
 
                 try {
-                    const result = await cloudinary.uploader.upload(image.filepath, { folder: 'categorys' })
+                    const result = await cloudinary.uploader.upload(image.filepath, { folder: 'categorys' });
 
                     if (result) {
                         const category = await categoryModel.create({
@@ -34,15 +34,41 @@ class categoryController {
                         })
                         responseReturn(res, 201, { category, message: 'category add success' })
                     } else {
-                        responseReturn(res, 404, { error: 'Image upload failed' })
+                        responseReturn(res, 404, { error: 'Image upload failed' + JSON.stringify(error, null, 2) })
                     }
                 } catch (error) {
-                    responseReturn(res, 500, { error: 'Internal server error' })
+                    responseReturn(res, 500, { error: 'Internal server error' + JSON.stringify(error, null, 2) })
                 }
 
             }
         })
     }
+
+    delete_category = async (req, res) => {
+
+        const form = formidable()
+        form.parse(req, async (err, fields, files) => {
+            if (err) {
+                responseReturn(res, 404, { error: 'something error' })
+            } else {
+                let { id } = fields;
+                console.log(id);
+        
+                try {
+                    const category = await categoryModel.findByIdAndDelete(id);
+        
+                    if (category) {
+                        responseReturn(res, 200, { message: 'Category deleted successfully' });
+                    } else {
+                        responseReturn(res, 404, { error: 'Category not found' });
+                    }
+                } catch (error) {
+                    responseReturn(res, 500, { error: `Internal server error: ${JSON.stringify(error, null, 2)} + ${id}` });
+                }
+            }
+        })
+        
+    };
 
     get_category = async (req, res) => {
         const { page, searchValue, parPage } = req.query
@@ -74,6 +100,8 @@ class categoryController {
             console.log(error.message)
         }
     }
+
+
 }
 
 module.exports = new categoryController()
