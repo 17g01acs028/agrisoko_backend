@@ -19,6 +19,7 @@ app.use(cors({
         'http://192.168.122.1:4000',
         'http://localhost:3000',
         'http://localhost:4000',
+        'https://agrisoko-dashboard-v2.vercel.app',
         'https://agrisoko-client-final.vercel.app',
         'https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app',
         'https://agrisoko-client.vercel.app',
