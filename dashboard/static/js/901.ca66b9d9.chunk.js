@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkdashboard=self.webpackChunkdashboard||[]).push([[901],{901:function(n,e,a){a.r(e);a(2791);var d=a(184);e.default=function(){return(0,d.jsx)("div",{children:"Pending"})}}}]);
-//# sourceMappingURL=901.ca66b9d9.chunk.js.map

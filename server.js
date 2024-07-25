@@ -15,8 +15,10 @@ const server = http.createServer(app)
 
 app.use(cors({
     origin: [
+        'http://192.168.122.1:3000',
+        'http://192.168.122.1:4000',
         'http://localhost:3000',
-        'http://localhost:3001',
+        'http://localhost:4000',
         'https://agrisoko-client-8l6uhc4hp-stepehen-mutios-projects.vercel.app',
         'https://agrisoko-client.vercel.app',
         'https://agrisoko-dashboard.vercel.app'
@@ -26,17 +28,6 @@ app.use(cors({
     credentials: true
 }));
 
-
-//Link web sit to server
-app.use('/client',express.static(path.join(__dirname, 'client')));
-app.get('/client/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'client', 'index.html'));
-});
-
-app.use('/dashboard',express.static(path.join(__dirname, 'dashboard')));
-app.get('/dashboard/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dashboard', 'index.html'));
-});
 
 const io = socket(server, {
     cors: {
