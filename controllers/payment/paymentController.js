@@ -6,7 +6,7 @@ const withdrowRequest = require('../../models/withdrowRequest')
 const { responseReturn } = require('../../utiles/response')
 const { mongo: { ObjectId } } = require('mongoose')
 const { v4: uuidv4 } = require('uuid')
-const stripe = require('stripe')('sk_test_51Nk8Y4F0B89ncn3xMHxYCwnaouDR6zuX83ckbJivv2jOUJ9CTka6anJcKMLnatgeBUeQq1RcRYynSPgp6f5zS4qF00YZFMYHuD')
+const stripe = require('stripe')('sk_test_51KKNH8LTMjTVSXPx1qTYKxBx9vje0tV7en4oO4uhknaV1vu7sM6RPFpU8BIFxUq4OK0JsF0j4d48ZaciI0Vs3X4q00zCwbQHou')
 class paymentController {
     create_stripe_connect_account = async (req, res) => {
         const { id } = req
@@ -21,8 +21,8 @@ class paymentController {
 
                 const accountLink = await stripe.accountLinks.create({
                     account: account.id,
-                    refresh_url: 'http://localhost:3001/refresh',
-                    return_url: `http://localhost:3001/success?activeCode=${uid}`,
+                    refresh_url: 'https://agrisoko-client-final.vercel.app/refresh',
+                    return_url: `https://agrisoko-client-final.vercel.app/success?activeCode=${uid}`,
                     type: 'account_onboarding'
                 })
                 await striptModel.create({
@@ -36,8 +36,8 @@ class paymentController {
 
                 const accountLink = await stripe.accountLinks.create({
                     account: account.id,
-                    refresh_url: 'http://localhost:3001/refresh',
-                    return_url: `http://localhost:3001/success?activeCode=${uid}`,
+                    refresh_url: 'https://agrisoko-client-final.vercel.app/refresh',
+                    return_url: `https://agrisoko-client-final.vercel.app/success?activeCode=${uid}`,
                     type: 'account_onboarding'
                 })
                 await striptModel.create({
