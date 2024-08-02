@@ -6,7 +6,9 @@ const withdrowRequest = require('../../models/withdrowRequest')
 const { responseReturn } = require('../../utiles/response')
 const { mongo: { ObjectId } } = require('mongoose')
 const { v4: uuidv4 } = require('uuid')
-const stripe = require('stripe')('sk_test_51KKNH8LTMjTVSXPx1qTYKxBx9vje0tV7en4oO4uhknaV1vu7sM6RPFpU8BIFxUq4OK0JsF0j4d48ZaciI0Vs3X4q00zCwbQHou')
+require('dotenv').config()
+
+const stripe = require('stripe')(process.env.STRIPE_KEY)
 class paymentController {
     create_stripe_connect_account = async (req, res) => {
         const { id } = req
